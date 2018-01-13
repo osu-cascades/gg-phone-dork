@@ -6,7 +6,7 @@
       "version": "0.0.1",
 
       "browser_action": {
-        "default_icon": "phone-dork-spy.png",
+        "default_icon": "gg-icon.png",
         "default_popup": "phonedork.html",
         "default_title": "Click me for instructions."
       },
@@ -16,9 +16,9 @@
         "contextMenus"
       ],
       "icons": {
-        "16": "phone-dork-spy.png",
-        "48": "phone-dork-spy.png",
-        "128": "phone-dork-spy.png"
+        "16": "gg-icon.png",
+        "48": "gg-icon.png",
+        "128": "gg-icon.png"
       },
       "background": {
         "scripts": ["phone-parser.js", "phonedork.js"]
