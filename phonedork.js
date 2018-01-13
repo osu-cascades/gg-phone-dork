@@ -14,6 +14,12 @@ searchGoogle = function(number) {
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query}); 
 }
 
+searchAll = function(word) {
+    var query = word.selectionText;
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
+    chrome.tabs.create({url: "https://www.google.com/search?q=" + query});
+}
+
 chrome.contextMenus.create({
     title: "Search in UrbanDictionary",
     contexts:["selection"],  // ContextType
@@ -31,3 +37,9 @@ chrome.contextMenus.create({
     contexts:["selection"],  // ContextType
     onclick: searchGoogle // A callback function
 });
+
+chrome.contextMenus.create({
+    title: "Search All",
+    contexts: ["selection"],  // ContextType
+    onclick: searchAll // A callback function
+})
