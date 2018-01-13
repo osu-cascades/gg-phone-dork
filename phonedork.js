@@ -29,7 +29,7 @@ searchTwilio = function(word) {
     var url  = "https://" + account_id + ":" + auth_token + "@";
     url      += "lookups.twilio.com/v1/PhoneNumbers/"
     url      += "+1" + query.replace("(",'').replace(")",'').replace("-",'');
-    url      += "?Type=carrier"; 
+    url      += "?Type=carrier&Type=caller-name"; 
     query_twilio(url);
 };
 
