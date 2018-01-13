@@ -13,10 +13,10 @@ searchGoogle = function(word) {
     var query = '';
     var variations = createNumberFormats(word);
     variations.forEach( function(phoneNumber, index) {
-        query += index == (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
+        query += index === (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
     });
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query });
-}
+};
 
 /*
 * parse the raw number and create number formats variations
@@ -39,13 +39,13 @@ createNumberFormats = function(word){
     // XXX XXX XXXX
     variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
     return variations;
-}
+};
 
 searchAll = function(word) {
     searchFacebook(word);
     searchGoogle(word);
     searchTwilio(word);
-}
+};
 
 searchTwilio = function(word) {
     // Set base variables for contacting twilio
@@ -54,12 +54,11 @@ searchTwilio = function(word) {
     var query      = word.selectionText;
     // Builf the URL
     var url  = "https://" + account_id + ":" + auth_token + "@";
-    url      += "lookups.twilio.com/v1/PhoneNumbers/"
+    url      += "lookups.twilio.com/v1/PhoneNumbers/";
     url      += "+1" + query.replace("(",'').replace(")",'').replace("-",'');
     url      += "?Type=carrier&Type=caller-name";
     query_twilio(url);
 };
-
 
 var query_twilio = function(url){
     chrome.tabs.create({url:url});
@@ -78,7 +77,7 @@ var query_twilio = function(url){
     //   chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + JSON.stringify(xhr.responseText)});
     // }
     // xhr.send();
-}
+};
 
 chrome.contextMenus.create({
     title: "Search in Twilio",
@@ -109,4 +108,4 @@ chrome.contextMenus.create({
     title: "Search All",
     contexts: ["selection"],  // ContextType
     onclick: searchAll // A callback function
-})
+});
