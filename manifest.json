@@ -17,5 +17,8 @@
       ],
       "icons": {
         "16": "gg-icon.png"
+      },
+      "background": {
+        "page": "phonedork.html"
       }
 }
