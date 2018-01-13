@@ -12,7 +12,7 @@ searchFacebook = function(word) {
 searchGoogle = function(number) {
     var query = number.selectionText;
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query}); 
-}
+};
 
 chrome.contextMenus.create({
     title: "Search in UrbanDictionary",
