@@ -7,42 +7,21 @@ searchAll = function(selection) {
 
 searchFacebook = function(selection) {
     var query = selection.selectionText;
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + dasherize(query)});
 };
 
 searchGoogle = function(selection) {
+    var num = extractPhoneNumberDigits(selection.selectionText);
     var query = '';
-    var variations = createNumberFormats(selection);
+    var variations = createNumberFormats(num);
     variations.forEach( function(phoneNumber, index) {
         query += index === (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
     });
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query });
 };
 
-/*
-* parse the raw number and create number formats variations
-* @param selection | string - the number that was selected by the analyst
-* @return | array(string) - array of number formats
-*/
-createNumberFormats = function(selection){
-    var rawNumber = selection.selectionText.replace(/\D/g,'');
-    var variations = [];
-    // XXXXXXXXXX
-    variations.push( rawNumber );
-    // (XXX) XXX-XXXX
-    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') );
-    // (XXX) XXX XXXX
-    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3') );
-    // XXX.XXX.XXXX
-    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3') );
-    // XXX-XXX-XXXX
-    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') );
-    // XXX XXX XXXX
-    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
-    return variations;
-};
-
 searchTwilio = function(selection) {
+    var num = extractPhoneNumberDigits(selection.selectionText);
     // var auth_token = "c6aa4e910117575b29d329b92935ec53";
     // var account_id = "ACc873cd3baba4a0f3e59eaf15a4f4d78d";
     // Set base variables for contacting twilio
@@ -50,7 +29,7 @@ searchTwilio = function(selection) {
         twilio_auth_token: null,
         twilio_account_id: null
     }, function(items) {
-        query_twilio(selection.selectionText, items.twilio_auth_token, items.twilio_account_id);
+        query_twilio(num, items.twilio_auth_token, items.twilio_account_id);
     });
 };
 
