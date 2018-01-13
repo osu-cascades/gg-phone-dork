@@ -7,7 +7,7 @@ searchAll = function(selection) {
 
 searchFacebook = function(selection) {
     var query = selection.selectionText;
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + dasherize(query)});
 };
 
 searchGoogle = function(selection) {
