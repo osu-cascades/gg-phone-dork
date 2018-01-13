@@ -8,8 +8,9 @@ searchAll = function(selection) {
 
 searchFacebook = function(selection) {
     if( !isValidSelection(selection) ){ return; }
-    var query = selection.selectionText;
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + dasherize(query)});
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var formatedNum = dasherize(num);
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + formatedNum});
 };
 
 searchGoogle = function(selection) {
