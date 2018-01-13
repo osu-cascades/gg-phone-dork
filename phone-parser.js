@@ -6,4 +6,27 @@ function extractPhoneNumberDigits(text) {
     return text.match(/\d/g).slice(-10).join([]);
 }
 
-module.exports = extractPhoneNumberDigits;
+/*
+* Parse the raw number and create number formats variations
+* @param digits | string - the number that was selected by the analyst
+* @return | array(string) - array of number formats
+*/
+function createNumberFormats(digits) {
+    var rawNumber = digits;
+    var variations = [];
+    // XXXXXXXXXX
+    variations.push( rawNumber );
+    // (XXX) XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') );
+    // (XXX) XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3') );
+    // XXX.XXX.XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3') );
+    // XXX-XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') );
+    // XXX XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
+    return variations;
+};
+
+module.exports = { extractPhoneNumberDigits, createNumberFormats };
