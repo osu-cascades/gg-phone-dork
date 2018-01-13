@@ -5,19 +5,41 @@ searchAll = function(word) {
     searchTwilio(word);
 };
 
-searchFacebook = function(selection) {
-    var num = extractPhoneNumberDigits(selection.selectionText);
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + num});
+searchFacebook = function(word) {
+    var query = word.selectionText;
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
 };
 
-searchGoogle = function(selection) {
-    var num = extractPhoneNumberDigits(selection.selectionText);
+searchGoogle = function(word) {
     var query = '';
-    var variations = createNumberFormats(num);
+    var variations = createNumberFormats(word);
     variations.forEach( function(phoneNumber, index) {
         query += index === (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
     });
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query });
+};
+
+/*
+* parse the raw number and create number formats variations
+* @param word | string - the number that was selected by the analyst
+* @return | array(string) - array of number formats
+*/
+createNumberFormats = function(word){
+    var rawNumber = word.selectionText.replace(/\D/g,'');
+    var variations = [];
+    // XXXXXXXXXX
+    variations.push( rawNumber );
+    // (XXX) XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') );
+    // (XXX) XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3') );
+    // XXX.XXX.XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3') );
+    // XXX-XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') );
+    // XXX XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
+    return variations;
 };
 
 searchTwilio = function(word) {
