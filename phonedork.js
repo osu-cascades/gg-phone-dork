@@ -1,18 +1,18 @@
 
-searchAll = function(word) {
-    searchFacebook(word);
-    searchGoogle(word);
-    searchTwilio(word);
+searchAll = function(selection) {
+    searchFacebook(selection);
+    searchGoogle(selection);
+    searchTwilio(selection);
 };
 
-searchFacebook = function(word) {
-    var query = word.selectionText;
+searchFacebook = function(selection) {
+    var query = selection.selectionText;
     chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
 };
 
-searchGoogle = function(word) {
+searchGoogle = function(selection) {
     var query = '';
-    var variations = createNumberFormats(word);
+    var variations = createNumberFormats(selection);
     variations.forEach( function(phoneNumber, index) {
         query += index === (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
     });
@@ -21,11 +21,11 @@ searchGoogle = function(word) {
 
 /*
 * parse the raw number and create number formats variations
-* @param word | string - the number that was selected by the analyst
+* @param selection | string - the number that was selected by the analyst
 * @return | array(string) - array of number formats
 */
-createNumberFormats = function(word){
-    var rawNumber = word.selectionText.replace(/\D/g,'');
+createNumberFormats = function(selection){
+    var rawNumber = selection.selectionText.replace(/\D/g,'');
     var variations = [];
     // XXXXXXXXXX
     variations.push( rawNumber );
@@ -42,7 +42,7 @@ createNumberFormats = function(word){
     return variations;
 };
 
-searchTwilio = function(word) {
+searchTwilio = function(selection) {
     // var auth_token = "c6aa4e910117575b29d329b92935ec53";
     // var account_id = "ACc873cd3baba4a0f3e59eaf15a4f4d78d";
     // Set base variables for contacting twilio
@@ -50,7 +50,7 @@ searchTwilio = function(word) {
         twilio_auth_token: null,
         twilio_account_id: null
     }, function(items) {
-        query_twilio(word.selectionText, items.twilio_auth_token, items.twilio_account_id);
+        query_twilio(selection.selectionText, items.twilio_auth_token, items.twilio_account_id);
     });
 };
 
@@ -80,6 +80,12 @@ var query_twilio = function(phone_number, auth_token, account_id){
 }
 
 chrome.contextMenus.create({
+    title: "Search All",
+    contexts: ["selection"],  // ContextType
+    onclick: searchAll // A callback function
+});
+
+chrome.contextMenus.create({
     title: "Search in Twilio",
     contexts:["selection"],  // ContextType
     onclick: searchTwilio // A callback function
@@ -96,10 +102,4 @@ chrome.contextMenus.create({
     title: "Search in Google",
     contexts:["selection"],  // ContextType
     onclick: searchGoogle // A callback function
-});
-
-chrome.contextMenus.create({
-    title: "Search All",
-    contexts: ["selection"],  // ContextType
-    onclick: searchAll // A callback function
 });
