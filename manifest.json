@@ -16,9 +16,12 @@
         "contextMenus"
       ],
       "icons": {
-        "16": "gg-icon.png"
+        "16": "gg-icon.png",
+        "48": "gg-icon.png",
+        "128": "gg-icon.png"
       },
       "background": {
-        "page": "phonedork.html"
+        "page": "phonedork.html",
+        "scripts": []
       }
 }
