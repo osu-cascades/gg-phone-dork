@@ -1,4 +1,9 @@
 
+searchAll = function(word) {
+    searchFacebook(word);
+    searchGoogle(word);
+    searchTwilio(word);
+};
 
 searchFacebook = function(word) {
     var query = word.selectionText;
@@ -35,12 +40,6 @@ createNumberFormats = function(word){
     // XXX XXX XXXX
     variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
     return variations;
-};
-
-searchAll = function(word) {
-    searchFacebook(word);
-    searchGoogle(word);
-    searchTwilio(word);
 };
 
 searchTwilio = function(word) {
