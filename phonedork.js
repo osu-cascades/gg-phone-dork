@@ -80,6 +80,12 @@ var query_twilio = function(phone_number, auth_token, account_id){
 }
 
 chrome.contextMenus.create({
+    title: "Search All",
+    contexts: ["selection"],  // ContextType
+    onclick: searchAll // A callback function
+});
+
+chrome.contextMenus.create({
     title: "Search in Twilio",
     contexts:["selection"],  // ContextType
     onclick: searchTwilio // A callback function
@@ -96,10 +102,4 @@ chrome.contextMenus.create({
     title: "Search in Google",
     contexts:["selection"],  // ContextType
     onclick: searchGoogle // A callback function
-});
-
-chrome.contextMenus.create({
-    title: "Search All",
-    contexts: ["selection"],  // ContextType
-    onclick: searchAll // A callback function
 });
