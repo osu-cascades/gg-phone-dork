@@ -9,9 +9,36 @@ searchFacebook = function(word) {
     chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
 };
 
-searchGoogle = function(number) {
-    var query = number.selectionText;
-    chrome.tabs.create({url: "https://www.google.com/search?q=" + query}); 
+searchGoogle = function(word) {
+    var query = '';
+    var variations = createNumberFormats(word);
+    variations.forEach( function(phoneNumber, index) {
+        query += index == (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
+    });
+    chrome.tabs.create({url: "https://www.google.com/search?q=" + query }); 
+}
+
+/* 
+* parse the raw number and create number formats variations
+* @param word | string - the number that was selected by the analyst
+* @return | array(string) - array of number formats
+*/
+createNumberFormats = function(word){
+    var rawNumber = word.selectionText.replace(/\D/g,'');
+    var variations = [];
+    // XXXXXXXXXX
+    variations.push( rawNumber );
+    // (XXX) XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') );
+    // (XXX) XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 $3') );
+    // XXX.XXX.XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1.$2.$3') );
+    // XXX-XXX-XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') );
+    // XXX XXX XXXX
+    variations.push( rawNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') );
+    return variations;
 }
 
 searchAll = function(word) {
@@ -29,7 +56,7 @@ searchTwilio = function(word) {
     var url  = "https://" + account_id + ":" + auth_token + "@";
     url      += "lookups.twilio.com/v1/PhoneNumbers/"
     url      += "+1" + query.replace("(",'').replace(")",'').replace("-",'');
-    url      += "?Type=carrier"; 
+    url      += "?Type=carrier&Type=caller-name"; 
     query_twilio(url);
 };
 

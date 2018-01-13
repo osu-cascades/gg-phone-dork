@@ -1,0 +1,25 @@
+{
+  "name": "phone-dork",
+  "version": "0.0.1",
+  "description": "Phone number searcher.",
+  "main": "phonedork.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osu-cascades/gg-phone-dork.git"
+  },
+  "author": "Hooligans at OSU Cascades",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osu-cascades/gg-phone-dork/issues"
+  },
+  "homepage": "https://github.com/osu-cascades/gg-phone-dork",
+  "devDependencies": {
+    "jest": "^22.0.6",
+    "jest-plugin-context": "^2.6.0",
+    "jest-plugins": "^2.6.0"
+  }
+}
