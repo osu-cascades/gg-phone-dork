@@ -1,5 +1,5 @@
-const sum = require('./phone-parser');
+const extractPhoneNumberDigits = require('./phone-parser');
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
+test("Extracts 1234567890 from '(123) 456-7890'", () => {
+  expect(extractPhoneNumberDigits("(123) 456-7890")).toBe("1234567890");
 });

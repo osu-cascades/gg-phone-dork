@@ -15,10 +15,10 @@ searchGoogle = function(word) {
     variations.forEach( function(phoneNumber, index) {
         query += index == (variations.length - 1) ? '"' + phoneNumber + '"' : '"' + phoneNumber + '"' + ' OR ';
     });
-    chrome.tabs.create({url: "https://www.google.com/search?q=" + query }); 
+    chrome.tabs.create({url: "https://www.google.com/search?q=" + query });
 }
 
-/* 
+/*
 * parse the raw number and create number formats variations
 * @param word | string - the number that was selected by the analyst
 * @return | array(string) - array of number formats
@@ -56,7 +56,7 @@ searchTwilio = function(word) {
     var url  = "https://" + account_id + ":" + auth_token + "@";
     url      += "lookups.twilio.com/v1/PhoneNumbers/"
     url      += "+1" + query.replace("(",'').replace(")",'').replace("-",'');
-    url      += "?Type=carrier&Type=caller-name"; 
+    url      += "?Type=carrier&Type=caller-name";
     query_twilio(url);
 };
 
@@ -73,7 +73,7 @@ var query_twilio = function(url){
     //     if (xhr.readyState == 4) {
     //         // WARNING! Might be injecting a malicious script!
     //         console.log(xhr.responseText);
-        
+
     //     }
     //   chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + JSON.stringify(xhr.responseText)});
     // }
