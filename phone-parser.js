@@ -1,3 +1,4 @@
+
 // Given a string, extract the ten digits of the phone number.
 // Returns an empty string if the text does not contain ten digits.
 // Examples:
@@ -7,12 +8,38 @@
 // @param text | string - a string containing a phone number
 // @return | string - ten digits of the phone number
 function extractPhoneNumberDigits(text) {
-    var numbers = text.match(/\d/g);
+	var numbers = text.match(/\d/g);
     if (numbers.length < 10) {
         return '';
     } else {
         return numbers.slice(-10).join([]);
     }
+}
+
+/*
+* validates the selection text
+* the tests are:
+* 1) Test to see if the selection is parsable
+* 2) Test to see if the selection is 10 digits
+* @return boolean
+*/
+function isValidSelection(selection) {
+	var tenDigitNumber;
+
+	try {
+	    tenDigitNumber = extractPhoneNumberDigits(selection.selectionText);
+	}
+	catch(err) {
+	    alert('The selection needs to be a number\nYou selected:\n\n' + selection.selectionText);
+	    return false;
+	}
+
+	var numberTest = /^\d{10}$/;
+	if( !numberTest.test(tenDigitNumber) ){
+		alert('The selection needs to be a valid phone number\nYou selected:\n\n' + selection.selectionText);
+		return false;
+	}
+    return true;
 }
 
 // Parse the raw number and create number formats variations
@@ -55,4 +82,4 @@ function dasherize(digits) {
     }
 }
 
-module.exports = { extractPhoneNumberDigits, createNumberFormats, dasherize };
+module.exports = { isValidSelection, extractPhoneNumberDigits, createNumberFormats, dasherize };
