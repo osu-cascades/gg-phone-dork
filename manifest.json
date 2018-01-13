@@ -2,13 +2,13 @@
     "manifest_version": 2,
 
       "name": "Phone Dork",
-      "description": "Highlight a phone number, right-click and execute a search.",
+      "description": "Highlight a phone number, right-click, and execute a. search. All searches will create a new tab. Search all will search Facebook, Google, and Twilio.",
       "version": "0.0.1",
 
       "browser_action": {
         "default_icon": "gg-icon.png",
         "default_popup": "phonedork.html",
-        "default_title": "Click Me"
+        "default_title": "Click me for instructions."
       },
       "permissions": [
         "activeTab",
