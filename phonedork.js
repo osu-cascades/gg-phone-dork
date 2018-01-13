@@ -42,9 +42,9 @@ createNumberFormats = function(word){
 }
 
 searchAll = function(word) {
-    var query = word.selectionText;
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
-    chrome.tabs.create({url: "https://www.google.com/search?q=" + query});
+    searchFacebook(word);
+    searchGoogle(word);
+    searchTwilio(word);
 }
 
 searchTwilio = function(word) {
