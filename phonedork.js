@@ -14,6 +14,12 @@ searchGoogle = function(number) {
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query}); 
 };
 
+searchAll = function(word) {
+    var query = word.selectionText;
+    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + query});
+    chrome.tabs.create({url: "https://www.google.com/search?q=" + query});
+}
+
 searchTwilio = function(word) {
     // Set base variables for contacting twilio
     var auth_token = "c6aa4e910117575b29d329b92935ec53";
@@ -23,7 +29,7 @@ searchTwilio = function(word) {
     var url  = "https://" + account_id + ":" + auth_token + "@";
     url      += "lookups.twilio.com/v1/PhoneNumbers/"
     url      += "+1" + query.replace("(",'').replace(")",'').replace("-",'');
-    url      += "?Type=carrier"; 
+    url      += "?Type=carrier&Type=caller-name"; 
     query_twilio(url);
 };
 
@@ -71,3 +77,9 @@ chrome.contextMenus.create({
     contexts:["selection"],  // ContextType
     onclick: searchGoogle // A callback function
 });
+
+chrome.contextMenus.create({
+    title: "Search All",
+    contexts: ["selection"],  // ContextType
+    onclick: searchAll // A callback function
+})
