@@ -2,29 +2,36 @@
 <html>
 <head>
   <title>Phone Dork Options</title>
+  <script src="options.js"></script>
   <style>
-    body: { padding: 10px; }
+    body {
+      padding: 20px;
+      margin: 0px;
+    }
+    h1 {
+      margin-top: 0px;
+    }
+    label {
+      display: block;
+    }
+
+    #status {
+      margin: 20px 0px;
+    }
   </style>
 </head>
-
 <body>
-  <div>
-    Twilio Options:
-    <br>
-    <label>
-      Account ID:
-      <input type="textbox" id="twilio_account_id"> </input>
-    </label>
-    <br>
-    <label>
-      Auth Token:
-      <input type="textbox" id="twilio_auth_token"> </input>
-    </label>
-  </div>
-
-  <div id="status"></div>
+  <h1>Twilio Options</h1>
+  <p>Obtain your Twilio <em>Account SID</em> and <em>Auth Token</em> from the <a href="https://www.twilio.com/console">Twilio Console</a>, and enter them here.</p>
+  <label for="twilio_account_id">Account SID</label>
+  <input type="textbox" id="twilio_account_id" name="twilio_account_id" size="40">
+  <br>
+  <br>
+  <label for="twilio_auth_token">Auth Token</label>
+  <input type="textbox" id="twilio_auth_token" name="twilio_auth_token" size="40">
+  <br>
+  <br>
   <button id="save">Save</button>
-
-  <script src="options.js"></script>
+  <div id="status"></div>
 </body>
 </html>

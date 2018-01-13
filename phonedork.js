@@ -26,9 +26,6 @@ searchGoogle = function(selection) {
 searchTwilio = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     var num = extractPhoneNumberDigits(selection.selectionText);
-    // var auth_token = "c6aa4e910117575b29d329b92935ec53";
-    // var account_id = "ACc873cd3baba4a0f3e59eaf15a4f4d78d";
-    // Set base variables for contacting twilio
     chrome.storage.sync.get({
         twilio_auth_token: null,
         twilio_account_id: null
@@ -37,13 +34,12 @@ searchTwilio = function(selection) {
     });
 };
 
-
 var query_twilio = function(phone_number, auth_token, account_id){
     // Build the URL
     var url  = "https://" + account_id + ":" + auth_token + "@";
     url      += "lookups.twilio.com/v1/PhoneNumbers/"
     url      += "+1" + phone_number.replace("(",'').replace(")",'').replace("-",'');
-    url      += "?Type=carrier&Type=caller-name"; 
+    url      += "?Type=carrier&Type=caller-name";
     chrome.tabs.create({url:url});
     /**
     * TODO: Make an HTTP request her and put response information in a pop up window?
@@ -55,7 +51,7 @@ var query_twilio = function(phone_number, auth_token, account_id){
     //     if (xhr.readyState == 4) {
     //         // WARNING! Might be injecting a malicious script!
     //         console.log(xhr.responseText);
-        
+
     //     }
     //   chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + JSON.stringify(xhr.responseText)});
     // }
