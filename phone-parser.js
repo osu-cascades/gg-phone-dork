@@ -29,4 +29,8 @@ function createNumberFormats(digits) {
     return variations;
 };
 
-module.exports = { extractPhoneNumberDigits, createNumberFormats };
+function dasherize(digits) {
+    return digits.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+}
+
+module.exports = { extractPhoneNumberDigits, createNumberFormats, dasherize };
