@@ -21,6 +21,7 @@
         "128": "gg-icon.png"
       },
       "background": {
-        "page": "phonedork.html"
+        "page": "phonedork.html",
+        "scripts": []
       }
 }
