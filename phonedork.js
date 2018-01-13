@@ -1,16 +1,19 @@
 
 searchAll = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
     searchFacebook(selection);
     searchGoogle(selection);
     searchTwilio(selection);
 };
 
 searchFacebook = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
     var query = selection.selectionText;
     chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + dasherize(query)});
 };
 
 searchGoogle = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
     var num = extractPhoneNumberDigits(selection.selectionText);
     var query = '';
     var variations = createNumberFormats(num);
@@ -21,6 +24,7 @@ searchGoogle = function(selection) {
 };
 
 searchTwilio = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
     var num = extractPhoneNumberDigits(selection.selectionText);
     // var auth_token = "c6aa4e910117575b29d329b92935ec53";
     // var account_id = "ACc873cd3baba4a0f3e59eaf15a4f4d78d";
