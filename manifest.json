@@ -1,29 +1,34 @@
 {
   "manifest_version": 2,
   "name": "PhoneDork",
-  "description": "Highlight a phone number, right-click, and execute a search.",
   "version": "0.0.1",
+  "description": "Highlight a phone number, right-click, and execute a search.",
+  "icons": {
+    "16": "images/gg-icon.png",
+    "48": "images/gg-icon.png",
+    "128": "images/gg-icon.png"
+  },
+  "author": "OSU Cascades on behalf of Guardian Group",
 
   "browser_action": {
-    "default_icon": "gg-icon.png",
-    "default_popup": "phonedork.html",
-    "default_title": "Click me for instructions."
+    "default_icon": "images/gg-icon.png",
+    "default_popup": "browser-action.html",
+    "default_title": "Guardian Group PhonDork"
   },
+
+  "background": {
+    "scripts": ["js/phone-parser.js", "js/phonedork.js"]
+  },
+
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+
   "permissions": [
     "activeTab",
     "storage",
     "contextMenus"
-  ],
-  "icons": {
-    "16": "gg-icon.png",
-    "48": "gg-icon.png",
-    "128": "gg-icon.png"
-  },
-  "background": {
-    "scripts": ["phone-parser.js", "phonedork.js"]
-  },
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  }
+  ]
+
 }
