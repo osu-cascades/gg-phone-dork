@@ -1,32 +1,29 @@
 {
-    "manifest_version": 2,
+  "manifest_version": 2,
+  "name": "Phone Dork",
+  "description": "Highlight a number, right-click, and execute a search. Search all will search Facebook, Google, and Twilio.",
+  "version": "0.0.1",
 
-      "name": "Phone Dork",
-      "description": "Highlight a number, right-click, and execute a search. Search all will search Facebook, Google, and Twilio.",
-      "version": "0.0.1",
-
-      "browser_action": {
-        "default_icon": "gg-icon.png",
-        "default_popup": "phonedork.html",
-        "default_title": "Click me for instructions."
-      },
-      "permissions": [
-        "activeTab",
-        "storage",
-        "contextMenus"
-      ],
-      "icons": {
-        "16": "gg-icon.png",
-        "48": "gg-icon.png",
-        "128": "gg-icon.png"
-      },
-      "background": {
-        "scripts": ["phone-parser.js", "phonedork.js"]
-      },
-      "options_ui": {
-        // Required.
-        "page": "options.html",
-        // Recommended.
-        "chrome_style": true
-      }
+  "browser_action": {
+    "default_icon": "gg-icon.png",
+    "default_popup": "phonedork.html",
+    "default_title": "Click me for instructions."
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "gg-icon.png",
+    "48": "gg-icon.png",
+    "128": "gg-icon.png"
+  },
+  "background": {
+    "scripts": ["phone-parser.js", "phonedork.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
 }
