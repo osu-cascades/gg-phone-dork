@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Phone Dork",
-  "description": "Highlight a number, right-click, and execute a search. Search all will search Facebook, Google, and Twilio.",
+  "name": "PhoneDork",
+  "description": "Highlight a phone number, right-click, and execute a search.",
   "version": "0.0.1",
 
   "browser_action": {
