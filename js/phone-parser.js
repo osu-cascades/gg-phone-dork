@@ -82,4 +82,5 @@ function dasherize(digits) {
     }
 }
 
-module.exports = { isValidSelection, extractPhoneNumberDigits, createNumberFormats, dasherize };
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
+    module.exports = { isValidSelection, extractPhoneNumberDigits, createNumberFormats, dasherize };
