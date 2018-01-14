@@ -1,11 +1,14 @@
-# Phone Dork
+# PhoneDork
 
-This extension takes a phone number selection from a webpage and executes searches against the number
-1) Google search
-2) Facebook search
-3) Twillio number search
+A Chrome extension enabling a user to select a phone number in a web page, and
+quickly execute searches with:
 
-The Google search checks for the following number formats
+* Google
+* Facebook
+* Twillio
+
+The Google search checks for the following number formats:
+
 * XXXXXXXXXX
 * (XXX) XXX-XXXX
 * (XXX) XXX XXXX
@@ -13,4 +16,8 @@ The Google search checks for the following number formats
 * XXX-XXX-XXXX
 * XXX XXX XXXX
 
-(c) 2018 TODO. All rights reserved.
+## Contributors
+
+Brian Christensen, @nielsentc,  @xDOASx, @natkpie, @JWTappert, Andrew Bell, Carson Key, @domJalb, @cvlessis, @ybakos.
+
+(c) 2018 Guardian Group. All rights reserved.
