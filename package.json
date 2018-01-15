@@ -5,7 +5,8 @@
   "main": "phonedork.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "build": "zip PhoneDork.zip manifest.json *.html images/* js/*"
   },
   "repository": {
     "type": "git",
