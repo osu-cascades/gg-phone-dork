@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "PhoneDork",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Highlight a phone number, right-click, and execute a search.",
   "icons": {
     "16": "images/gg-icon.png",
