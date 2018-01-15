@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "PhoneDork",
+  "short_name": "PhoneDork",
   "version": "0.0.2",
   "description": "Highlight a phone number, right-click, and execute a search.",
   "icons": {
@@ -13,7 +14,7 @@
   "browser_action": {
     "default_icon": "images/gg-icon.png",
     "default_popup": "browser-action.html",
-    "default_title": "Guardian Group PhonDork"
+    "default_title": "Guardian Group PhoneDork"
   },
 
   "background": {
