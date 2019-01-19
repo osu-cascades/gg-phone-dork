@@ -1,7 +1,6 @@
 
 searchAll = function(selection) {
     if( !isValidSelection(selection) ){ return; }
-    searchFacebook(selection);
     searchGoogle(selection);
     searchTwilio(selection);
 };
@@ -51,6 +50,12 @@ var query_twilio = function(phone_number, auth_token, account_id){
     // }
     // xhr.send();
 }
+
+
+
+
+
+
 
 chrome.contextMenus.create({
     title: "Search All",
