@@ -3,22 +3,18 @@ document.addEventListener('DOMContentLoaded', setup);
 function setup() {
   restoreOptions();
   listCustomURL();
-  document.getElementById('save').addEventListener('click', saveOptions);
+  document.getElementById('save').addEventListener('click', saveCustomUrl);
 }
-
 
 //TODO create functions to use custom urls
 
 //Saves options to chrome.storage.sync.
-function saveOptions() {
-  var user_custom_url = document.getElementById('custom_url').value;
-  chrome.storage.sync.set({
-    custom_url: user_custom_url,
-  }, function() {
-    var status = document.getElementById('status');
-    status.textContent = 'Custom URL saved.';
-    setTimeout(function() { status.textContent = ''; }, 1000);
-  });
+function saveCustomUrl() {
+  var site_name = document.getElementById('site_name').value;
+  var custom_url = document.getElementById('custom_url').value;
+
+  alert("Not yet supported.")
+
 }
 
 //Restores form state using the preferences in chrome.storage.
@@ -36,6 +32,6 @@ function listCustomURL() {
   chrome.storage.sync.get({
     custom_url
   }, function(result) {
-  document.getElementById('custom_url_list').innerHTML = result.key;
+  document.getElementById('custom_url_list').innerHTML = result.custom_url;
   });
 }
