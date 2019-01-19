@@ -6,13 +6,6 @@ searchAll = function(selection) {
     searchTwilio(selection);
 };
 
-searchFacebook = function(selection) {
-    if( !isValidSelection(selection) ){ return; }
-    var num = extractPhoneNumberDigits(selection.selectionText);
-    var formatedNum = dasherize(num);
-    chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + formatedNum});
-};
-
 searchGoogle = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     var num = extractPhoneNumberDigits(selection.selectionText);
@@ -69,13 +62,6 @@ chrome.contextMenus.create({
     title: "Search in Twilio",
     contexts:["selection"],  // ContextType
     onclick: searchTwilio // A callback function
-});
-
-
-chrome.contextMenus.create({
-    title: "Search in Facebook",
-    contexts:["selection"],  // ContextType
-    onclick: searchFacebook // A callback function
 });
 
 chrome.contextMenus.create({
