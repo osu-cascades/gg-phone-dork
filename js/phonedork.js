@@ -1,4 +1,3 @@
-
 searchAll = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     searchGoogle(selection);
@@ -27,6 +26,7 @@ searchTwilio = function(selection) {
     });
 };
 
+
 var query_twilio = function(phone_number, auth_token, account_id){
     // Build the URL
     var url  = "https://" + account_id + ":" + auth_token + "@";
@@ -51,11 +51,31 @@ var query_twilio = function(phone_number, auth_token, account_id){
     // xhr.send();
 }
 
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if( request.msg == "createContextMenu" ) {
+            createContextMenu(request.name, request.url)
+        } else if ( request.msg == "removeContextMenu" ) {
+            removeContextMenu()
+        }
+    }
+)
 
+createContextMenu = function(name, custom_url) {
+    chrome.contextMenus.create({
+        title: "Search " + name,
+        contexts: ["selection"],
+        onclick: function(selection) {
+            if( !isValidSelection(selection) ){ return; }
+            var num = extractPhoneNumberDigits(selection.selectionText);
+            chrome.tabs.create({url: custom_url + num});
+        }
+    })
+}
 
+removeContextMenu = function() {
 
-
-
+}
 
 chrome.contextMenus.create({
     title: "Search All",

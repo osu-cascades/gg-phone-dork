@@ -13,8 +13,7 @@ function saveCustomUrl() {
   var site_name = document.getElementById('site_name').value;
   var custom_url = document.getElementById('custom_url').value;
 
-  alert("Not yet supported.")
-
+  chrome.runtime.sendMessage({msg: "createContextMenu", name: site_name, url: custom_url});
 }
 
 //Restores form state using the preferences in chrome.storage.
