@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', setup);
 
 function setup() {
   listCustomURL();
-  document.getElementById('save').addEventListener('click', saveOptionsURL);
-  document.getElementById("removeButton").addEventListener("click", removeURL);
+  document.getElementById('save').addEventListener('click', saveCustomUrl);
 }
 
 //
