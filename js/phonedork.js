@@ -56,13 +56,13 @@ chrome.runtime.onMessage.addListener(
         if( request.msg == "createContextMenu" ) {
             createContextMenu(request.name, request.url)
         } else if ( request.msg == "removeContextMenu" ) {
-            removeContextMenu()
+            removeContextMenu(request.id)
         }
     }
 )
 
 createContextMenu = function(name, custom_url) {
-    chrome.contextMenus.create({
+    var id = chrome.contextMenus.create({
         title: "Search " + name,
         contexts: ["selection"],
         onclick: function(selection) {
@@ -70,11 +70,29 @@ createContextMenu = function(name, custom_url) {
             var num = extractPhoneNumberDigits(selection.selectionText);
             chrome.tabs.create({url: custom_url + num});
         }
+    });
+
+    var new_url = {}
+    new_url[id] = name
+
+    chrome.storage.sync.get({custom_urls: []}, function(result) {
+        var urls = result.custom_urls;
+        urls.push(new_url);
+        chrome.storage.sync.set({custom_urls: urls});
     })
+    
 }
 
-removeContextMenu = function() {
+removeContextMenu = function(id) {
+    //chrome.contextMenus.remove(id);
+}
 
+checkCustomUrls = function() {
+    chrome.storage.sync.get('custom_urls', function(data) {
+        if( typeof data.custom_urls === 'undefined') {
+            chrome.storage.sync.set({custom_urls: {}});
+        }
+    })
 }
 
 chrome.contextMenus.create({
