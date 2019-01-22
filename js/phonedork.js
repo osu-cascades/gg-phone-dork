@@ -62,7 +62,10 @@ chrome.runtime.onMessage.addListener(
 )
 
 createContextMenu = function(name, custom_url) {
-    var id = chrome.contextMenus.create({
+    var id = Math.floor(Date.now() / 1000).toString()
+    
+    chrome.contextMenus.create({
+        id: id,
         title: "Search " + name,
         contexts: ["selection"],
         onclick: function(selection) {
@@ -84,15 +87,27 @@ createContextMenu = function(name, custom_url) {
 }
 
 removeContextMenu = function(id) {
-    //chrome.contextMenus.remove(id);
-}
+    chrome.contextMenus.remove(id);
+    chrome.storage.sync.get({custom_urls: []}, function(result) {
+        var urls = result.custom_urls
+        var found = false;
 
-checkCustomUrls = function() {
-    chrome.storage.sync.get('custom_urls', function(data) {
-        if( typeof data.custom_urls === 'undefined') {
-            chrome.storage.sync.set({custom_urls: {}});
+        for(var i = 0; i < urls.length; i++) {
+            var url = urls[i]
+
+            for(var ctx_id in url) {
+                if( ctx_id == id ) {
+                    urls.splice(i, 1);
+                    found = true;
+                }
+            }
+            if( found ) {
+                break;
+            }
         }
-    })
+
+        chrome.storage.sync.set({custom_urls: urls});
+    });
 }
 
 chrome.contextMenus.create({

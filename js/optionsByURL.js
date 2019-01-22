@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', setup);
 function setup() {
   listCustomURL();
   document.getElementById('save').addEventListener('click', saveCustomUrl);
-  //document.getElementById('remove').addEventListener('click', removeCustomUrl);
 }
 
 //
@@ -31,6 +30,9 @@ function listCustomURL() {
           document.getElementById("custom_url_list").innerHTML += '<li><button id="remove" value="' + id + 
           '">Remove</button>  ' + url[id] + '</li>';
         } 
+      }
+      if( urls.length > 0 ) {
+        document.getElementById('remove').addEventListener('click', removeCustomUrl);
       }
     }
   )
