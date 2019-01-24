@@ -4,7 +4,6 @@ A Chrome extension enabling a user to select a phone number in a web page, and
 quickly execute searches with:
 
 * Google
-* Facebook
 * Twillio
 
 The Google search checks for the following number formats:
