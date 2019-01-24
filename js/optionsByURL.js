@@ -5,20 +5,28 @@ function setup() {
   document.getElementById('save').addEventListener('click', saveCustomUrl);
 }
 
-//
 function saveCustomUrl() {
   var site_name = document.getElementById('site_name').value;
   var custom_url = document.getElementById('custom_url').value;
 
-  chrome.runtime.sendMessage({msg: "createContextMenu", name: site_name, url: custom_url});
+  chrome.runtime.sendMessage({
+    msg: "createContextMenu",
+    name: site_name, 
+    url: custom_url
+  }, function() {
+    var status = document.getElementById('status')
+    status.textContent = 'Custom url saved.'
+    setTimeout(function() { status.textContent = ''; }, 1000);
+  });
 }
 
-//
 function removeCustomUrl() {
-  chrome.runtime.sendMessage({msg: "removeContextMenu", id: this.value})
+  chrome.runtime.sendMessage({
+    msg: "removeContextMenu",
+    id: this.value
+  });
 }
 
-//List current custom urls
 function listCustomURL() {
   chrome.storage.sync.get({custom_urls: []}, function(result) {
       var urls = result.custom_urls;

@@ -72,9 +72,9 @@ var query_twilio = function(phone_number, auth_token, account_id){
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if( request.msg == "createContextMenu" ) {
-            createContextMenu(request.name, request.url)
+            createContextMenu(request.name, request.url);
         } else if ( request.msg == "removeContextMenu" ) {
-            removeContextMenu(request.id)
+            removeContextMenu(request.id);
         }
     }
 )
@@ -101,7 +101,6 @@ createContextMenu = function(name, custom_url) {
         urls.push(new_url);
         chrome.storage.sync.set({custom_urls: urls});
     })
-    
 }
 
 removeContextMenu = function(id) {

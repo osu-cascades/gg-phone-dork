@@ -14,8 +14,11 @@ function saveOptions() {
     twilio_auth_token: twilio_auth_token
   }, function() {
     var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
-    setTimeout(function() { status.textContent = ''; }, 750);
+    status.textContent = 'Twilio credentials saved.';
+    setTimeout(function() { 
+      status.textContent = '';
+      window.close() 
+    }, 1000);
   });
 }
 
