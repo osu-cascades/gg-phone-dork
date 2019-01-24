@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/osu-cascades/gg-phone-dork",
   "devDependencies": {
-    "jest": "^22.0.6",
-    "jest-plugin-context": "^2.6.0",
-    "jest-plugins": "^2.6.0"
+    "jest": "^23.6.0",
+    "jest-plugin-context": "^2.9.0",
+    "jest-plugins": "^2.9.0"
   }
 }
