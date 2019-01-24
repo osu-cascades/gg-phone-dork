@@ -28,12 +28,11 @@ function listCustomURL() {
         
         for(var id in url) {
           document.getElementById("custom_url_list").innerHTML += '<li><button id="remove" value="' + id + 
-          '">Remove</button>  ' + url[id] + '</li>';
+          '">Remove</button>  ' + url[id][0] + '</li>';
         } 
       }
       if( urls.length > 0 ) {
         document.getElementById('remove').addEventListener('click', removeCustomUrl);
       }
-    }
-  )
+  });
 }

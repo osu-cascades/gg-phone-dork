@@ -2,6 +2,24 @@ searchAll = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     searchGoogle(selection);
     searchTwilio(selection);
+
+    chrome.storage.sync.get({custom_urls: []}, function(result) {
+        var urls = result.custom_urls
+
+        for(var i = 0; i < urls.length; i++) {
+            var url = urls[i]
+
+            for(var id in url) {
+                searchCustomUrl(url[id][1], selection)
+            }
+        }
+    });
+};
+
+searchCustomUrl = function(custom_url, selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    chrome.tabs.create({url: custom_url + num});
 };
 
 searchGoogle = function(selection) {
@@ -76,7 +94,7 @@ createContextMenu = function(name, custom_url) {
     });
 
     var new_url = {}
-    new_url[id] = name
+    new_url[id] = [name, custom_url]
 
     chrome.storage.sync.get({custom_urls: []}, function(result) {
         var urls = result.custom_urls;
