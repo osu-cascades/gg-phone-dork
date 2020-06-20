@@ -116,7 +116,7 @@ searchSyncMe = function(selection) {
     var query = '';
     var externalUrls = getExternalUrls();
     var variations   = createNumberFormats(num);
-    var phoneNumber  = variations[0]
+    var phoneNumber  = variations[4]
     var externalSite = externalUrls[6];
     chrome.tabs.create({url: externalSite + phoneNumber });
 };
@@ -128,7 +128,7 @@ searchOkCaller = function(selection) {
     var query = '';
     var externalUrls = getExternalUrls();
     var variations   = createNumberFormats(num);
-    var phoneNumber  = variations[0]
+    var phoneNumber  = variations[4]
     var externalSite = externalUrls[7];
     chrome.tabs.create({url: externalSite + phoneNumber });
 };
