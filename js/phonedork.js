@@ -1,7 +1,29 @@
 searchAll = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     searchGoogle(selection);
+    searchHLR(selection);
     searchTwilio(selection);
+    searchSpyTox(selection);
+    searchTruePeopleSearch(selection);
+    searchFastPeopleSearch(selection);
+    searchAdvancedBackgroundChecks(selection);
+    searchCyberBackgroundChecks(selection);
+    searchThatsThem(selection);
+    searchSyncMe(selection);
+    searchOkCaller(selection);
+};
+
+getExternalUrls = function() {
+    var externalSiteList = [];
+    externalSiteList.push("https://www.spytox.com/people/search?phone=");
+    externalSiteList.push("https://www.truepeoplesearch.com/resultphone?phoneno=");
+    externalSiteList.push("https://www.fastpeoplesearch.com/");
+    externalSiteList.push("https://www.advancedbackgroundchecks.com/");
+    externalSiteList.push("https://www.cyberbackgroundchecks.com/phone/");
+    externalSiteList.push("https://thatsthem.com/phone/");
+    externalSiteList.push("https://sync.me/search/?number=");
+    externalSiteList.push("https://www.okcaller.com/detail.php?number=");
+    return externalSiteList;
 };
 
 searchGoogle = function(selection) {
@@ -15,6 +37,125 @@ searchGoogle = function(selection) {
     chrome.tabs.create({url: "https://www.google.com/search?q=" + query });
 };
 
+searchSpyTox = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[4]
+    var externalSite = externalUrls[0];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchTruePeopleSearch = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[0]
+    var externalSite = externalUrls[1];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchFastPeopleSearch = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[4]
+    var externalSite = externalUrls[2];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchAdvancedBackgroundChecks = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[4]
+    var externalSite = externalUrls[3];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchCyberBackgroundChecks = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[4]
+    var externalSite = externalUrls[4];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchThatsThem = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[4]
+    var externalSite = externalUrls[5];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchSyncMe = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[0]
+    var externalSite = externalUrls[6];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchOkCaller = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    var externalUrl = '';
+    var query = '';
+    var externalUrls = getExternalUrls();
+    var variations   = createNumberFormats(num);
+    var phoneNumber  = variations[0]
+    var externalSite = externalUrls[7];
+    chrome.tabs.create({url: externalSite + phoneNumber });
+};
+
+searchHLR = function(selection) {
+    if( !isValidSelection(selection) ){ return; }
+    var num = extractPhoneNumberDigits(selection.selectionText);
+    chrome.storage.sync.get({
+        hlr_api_username: null,
+        hlr_api_password: null
+    }, function(items) {
+        query_hlr(num, items.hlr_api_username, items.hlr_api_password);
+    });
+};
+
+var query_hlr = function(phone_number, api_username, api_password){
+    // Build the URL
+    var url  = "https://www.hlr-lookups.com";
+    url      += "/api/"
+    url      += "?action=submitSyncLookupRequest&msisdn=";
+    url      += "+1" + phone_number.replace("(",'').replace(")",'').replace("-",'');
+    url      += "&route=IP1";
+    url      += "&username="+api_username;
+    url      += "&password="+api_password;
+    chrome.tabs.create({url:url});
+}
+
 searchTwilio = function(selection) {
     if( !isValidSelection(selection) ){ return; }
     var num = extractPhoneNumberDigits(selection.selectionText);
@@ -26,7 +167,6 @@ searchTwilio = function(selection) {
     });
 };
 
-
 var query_twilio = function(phone_number, auth_token, account_id){
     // Build the URL
     var url  = "https://" + account_id + ":" + auth_token + "@";
@@ -34,21 +174,6 @@ var query_twilio = function(phone_number, auth_token, account_id){
     url      += "+1" + phone_number.replace("(",'').replace(")",'').replace("-",'');
     url      += "?Type=carrier&Type=caller-name";
     chrome.tabs.create({url:url});
-    /**
-    * TODO: Make an HTTP request her and put response information in a pop up window?
-    */
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("GET", url, true);
-    // xhr.onreadystatechange = function() {
-    //     console.log(xhr);
-    //     if (xhr.readyState == 4) {
-    //         // WARNING! Might be injecting a malicious script!
-    //         console.log(xhr.responseText);
-
-    //     }
-    //   chrome.tabs.create({url: "https://www.facebook.com/search/top/?q=" + JSON.stringify(xhr.responseText)});
-    // }
-    // xhr.send();
 }
 
 chrome.runtime.onMessage.addListener(
@@ -123,7 +248,61 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+    title: "Search in HLR",
+    contexts:["selection"],  // ContextType
+    onclick: searchHLR // A callback function
+});
+
+chrome.contextMenus.create({
     title: "Search in Google",
     contexts:["selection"],  // ContextType
     onclick: searchGoogle // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in SpyTox",
+    contexts:["selection"],  // ContextType
+    onclick: searchSpyTox // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in TruePeopleSearch",
+    contexts:["selection"],  // ContextType
+    onclick: searchTruePeopleSearch // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in FastPeopleSearch",
+    contexts:["selection"],  // ContextType
+    onclick: searchFastPeopleSearch // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in AdvancedBackgroundChecks",
+    contexts:["selection"],  // ContextType
+    onclick: searchAdvancedBackgroundChecks // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in CyberBackgroundChecks",
+    contexts:["selection"],  // ContextType
+    onclick: searchCyberBackgroundChecks // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in ThatsThem",
+    contexts:["selection"],  // ContextType
+    onclick: searchThatsThem // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in SyncMe",
+    contexts:["selection"],  // ContextType
+    onclick: searchSyncMe // A callback function
+});
+
+chrome.contextMenus.create({
+    title: "Search in OkCaller",
+    contexts:["selection"],  // ContextType
+    onclick: searchOkCaller // A callback function
 });
